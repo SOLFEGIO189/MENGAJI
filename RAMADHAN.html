@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catatan Tadarus Guru</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    .font-amiri { font-family: 'Amiri', serif; }
+    .font-poppins { font-family: 'Poppins', sans-serif; }
+    .islamic-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M30 0l30 30-30 30L0 30 30 0zm0 10L10 30l20 20 20-20-20-20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .card-shadow {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+    .btn-loading {
+      position: relative;
+      color: transparent !important;
+    }
+    .btn-loading::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 50%;
+      left: 50%;
+      margin-left: -8px;
+      margin-top: -8px;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full font-poppins">
+  <div id="app-container" class="h-full w-full overflow-auto islamic-pattern" style="background-color: #0d4f3c;">
+   <!-- Header -->
+   <header class="py-6 px-4 text-center">
+    <div class="max-w-4xl mx-auto">
+     <div class="text-5xl mb-3">
+      📖
+     </div>
+     <h1 id="app-title" class="font-amiri text-3xl md:text-4xl font-bold text-white mb-2">Catatan Tadarus Al-Qur'an</h1>
+     <p id="school-name" class="text-emerald-200 text-lg">SMPN 189 Jakarta</p>
+     <p id="event-name" class="text-emerald-300 text-sm mt-1">Ramadhan 1447 H</p>
+    </div>
+   </header><!-- Main Content -->
+   <main class="px-4 pb-8">
+    <div class="max-w-4xl mx-auto">
+     <!-- Form Card -->
+     <div class="bg-white rounded-2xl card-shadow p-6 mb-6 fade-in">
+      <h2 class="font-amiri text-xl font-bold text-emerald-800 mb-4 flex items-center gap-2"><span>✍️</span> Tambah Catatan Tadarus</h2>
+      <form id="tadarus-form" class="space-y-4">
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Nama Guru -->
+        <div>
+         <label for="nama-guru" class="block text-sm font-medium text-gray-700 mb-1">Nama Guru</label> <input type="text" id="nama-guru" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition" placeholder="Masukkan nama guru">
+        </div><!-- Tanggal -->
+        <div>
+         <label for="tanggal" class="block text-sm font-medium text-gray-700 mb-1">Tanggal</label> <input type="date" id="tanggal" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+        </div>
+       </div>
+       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Surah Mulai -->
+        <div>
+         <label for="surah-mulai" class="block text-sm font-medium text-gray-700 mb-1">Surah Mulai</label> <select id="surah-mulai" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"> <option value="">Pilih Surah</option> </select>
+        </div><!-- Ayat Mulai -->
+        <div>
+         <label for="ayat-mulai" class="block text-sm font-medium text-gray-700 mb-1">Ayat Mulai</label> <input type="number" id="ayat-mulai" min="1" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition" placeholder="1">
+        </div><!-- Juz -->
+        <div>
+         <label for="juz" class="block text-sm font-medium text-gray-700 mb-1">Juz</label> <select id="juz" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"> <option value="">Pilih Juz</option> </select>
+        </div>
+       </div>
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Surah Selesai -->
+        <div>
+         <label for="surah-selesai" class="block text-sm font-medium text-gray-700 mb-1">Surah Selesai</label> <select id="surah-selesai" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"> <option value="">Pilih Surah</option> </select>
+        </div><!-- Ayat Selesai -->
+        <div>
+         <label for="ayat-selesai" class="block text-sm font-medium text-gray-700 mb-1">Ayat Selesai</label> <input type="number" id="ayat-selesai" min="1" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition" placeholder="1">
+        </div>
+       </div><!-- Catatan -->
+       <div>
+        <label for="catatan" class="block text-sm font-medium text-gray-700 mb-1">Catatan (Opsional)</label> <textarea id="catatan" rows="2" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition" placeholder="Tambahkan catatan..."></textarea>
+       </div><!-- Submit Button --> <button type="submit" id="submit-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-lg transition transform hover:scale-[1.02] active:scale-[0.98]"> 💾 Simpan Catatan </button>
+      </form><!-- Limit Warning -->
+      <div id="limit-warning" class="hidden mt-4 p-3 bg-amber-100 border border-amber-300 rounded-lg text-amber-800 text-sm">
+       ⚠️ Batas maksimum 999 catatan telah tercapai. Silakan hapus beberapa catatan untuk menambah yang baru.
+      </div>
+     </div><!-- Statistics -->
+     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white/90 backdrop-blur rounded-xl p-4 text-center card-shadow">
+       <div class="text-2xl font-bold text-emerald-600" id="total-entries">
+        0
+       </div>
+       <div class="text-xs text-gray-600">
+        Total Catatan
+       </div>
+      </div>
+      <div class="bg-white/90 backdrop-blur rounded-xl p-4 text-center card-shadow">
+       <div class="text-2xl font-bold text-blue-600" id="total-teachers">
+        0
+       </div>
+       <div class="text-xs text-gray-600">
+        Guru Aktif
+       </div>
+      </div>
+      <div class="bg-white/90 backdrop-blur rounded-xl p-4 text-center card-shadow">
+       <div class="text-2xl font-bold text-purple-600" id="total-juz">
+        0
+       </div>
+       <div class="text-xs text-gray-600">
+        Juz Dibaca
+       </div>
+      </div>
+      <div class="bg-white/90 backdrop-blur rounded-xl p-4 text-center card-shadow">
+       <div class="text-2xl font-bold text-orange-600" id="today-entries">
+        0
+       </div>
+       <div class="text-xs text-gray-600">
+        Hari Ini
+       </div>
+      </div>
+     </div><!-- Records List -->
+     <div class="bg-white rounded-2xl card-shadow p-6 fade-in">
+      <h2 class="font-amiri text-xl font-bold text-emerald-800 mb-4 flex items-center gap-2"><span>📋</span> Riwayat Tadarus</h2><!-- Search & Filter -->
+      <div class="flex flex-col md:flex-row gap-3 mb-4">
+       <input type="text" id="search-input" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="🔍 Cari nama guru..."> <select id="filter-juz" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"> <option value="">Semua Juz</option> </select>
+      </div><!-- Records Container -->
+      <div id="records-list" class="space-y-3 max-h-96 overflow-y-auto">
+       <div class="text-center py-8 text-gray-500">
+        <div class="text-4xl mb-2">
+         📚
+        </div>
+        <p>Belum ada catatan tadarus</p>
+        <p class="text-sm">Mulai tambahkan catatan pertama!</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </main><!-- Footer -->
+   <footer class="py-4 text-center text-emerald-200 text-sm">
+    <p>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+    <p class="mt-1 text-emerald-300/70">© 2025 SMPN 189 Jakarta</p>
+   </footer>
+  </div><!-- Delete Confirmation Modal -->
+  <div id="delete-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+   <div class="bg-white rounded-xl p-6 max-w-sm w-full card-shadow">
+    <h3 class="font-semibold text-lg text-gray-800 mb-2">Hapus Catatan?</h3>
+    <p class="text-gray-600 text-sm mb-4">Catatan ini akan dihapus secara permanen.</p>
+    <div class="flex gap-3">
+     <button id="cancel-delete" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"> Batal </button> <button id="confirm-delete" class="flex-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"> Hapus </button>
+    </div>
+   </div>
+  </div>
+  <script>
+    // Daftar Surah Al-Qur'an
+    const surahList = [
+      "Al-Fatihah", "Al-Baqarah", "Ali 'Imran", "An-Nisa'", "Al-Ma'idah", "Al-An'am", "Al-A'raf", "Al-Anfal", "At-Taubah", "Yunus",
+      "Hud", "Yusuf", "Ar-Ra'd", "Ibrahim", "Al-Hijr", "An-Nahl", "Al-Isra'", "Al-Kahf", "Maryam", "Ta Ha",
+      "Al-Anbiya'", "Al-Hajj", "Al-Mu'minun", "An-Nur", "Al-Furqan", "Asy-Syu'ara'", "An-Naml", "Al-Qasas", "Al-'Ankabut", "Ar-Rum",
+      "Luqman", "As-Sajdah", "Al-Ahzab", "Saba'", "Fatir", "Ya Sin", "As-Saffat", "Sad", "Az-Zumar", "Gafir",
+      "Fussilat", "Asy-Syura", "Az-Zukhruf", "Ad-Dukhan", "Al-Jasiyah", "Al-Ahqaf", "Muhammad", "Al-Fath", "Al-Hujurat", "Qaf",
+      "Az-Zariyat", "At-Tur", "An-Najm", "Al-Qamar", "Ar-Rahman", "Al-Waqi'ah", "Al-Hadid", "Al-Mujadalah", "Al-Hasyr", "Al-Mumtahanah",
+      "As-Saff", "Al-Jumu'ah", "Al-Munafiqun", "At-Tagabun", "At-Talaq", "At-Tahrim", "Al-Mulk", "Al-Qalam", "Al-Haqqah", "Al-Ma'arij",
+      "Nuh", "Al-Jinn", "Al-Muzzammil", "Al-Muddassir", "Al-Qiyamah", "Al-Insan", "Al-Mursalat", "An-Naba'", "An-Nazi'at", "'Abasa",
+      "At-Takwir", "Al-Infitar", "Al-Mutaffifin", "Al-Insyiqaq", "Al-Buruj", "At-Tariq", "Al-A'la", "Al-Gasyiyah", "Al-Fajr", "Al-Balad",
+      "Asy-Syams", "Al-Lail", "Ad-Duha", "Asy-Syarh", "At-Tin", "Al-'Alaq", "Al-Qadr", "Al-Bayyinah", "Az-Zalzalah", "Al-'Adiyat",
+      "Al-Qari'ah", "At-Takasur", "Al-'Asr", "Al-Humazah", "Al-Fil", "Quraisy", "Al-Ma'un", "Al-Kausar", "Al-Kafirun", "An-Nasr",
+      "Al-Masad", "Al-Ikhlas", "Al-Falaq", "An-Nas"
+    ];
+
+    // Default config
+    const defaultConfig = {
+      app_title: "Catatan Tadarus Al-Qur'an",
+      school_name: "SMPN 189 Jakarta",
+      event_name: "Ramadhan 1447 H",
+      background_color: "#0d4f3c",
+      card_color: "#ffffff",
+      text_color: "#1f2937",
+      primary_color: "#059669",
+      secondary_color: "#d1fae5"
+    };
+
+    let allRecords = [];
+    let recordToDelete = null;
+    let isSubmitting = false;
+
+    // Populate dropdowns
+    function populateDropdowns() {
+      const surahSelects = document.querySelectorAll('#surah-mulai, #surah-selesai');
+      surahSelects.forEach(select => {
+        surahList.forEach((surah, index) => {
+          const option = document.createElement('option');
+          option.value = surah;
+          option.textContent = `${index + 1}. ${surah}`;
+          select.appendChild(option);
+        });
+      });
+
+      const juzSelect = document.getElementById('juz');
+      const filterJuz = document.getElementById('filter-juz');
+      for (let i = 1; i <= 30; i++) {
+        const option1 = document.createElement('option');
+        option1.value = `Juz ${i}`;
+        option1.textContent = `Juz ${i}`;
+        juzSelect.appendChild(option1);
+        
+        const option2 = document.createElement('option');
+        option2.value = `Juz ${i}`;
+        option2.textContent = `Juz ${i}`;
+        filterJuz.appendChild(option2);
+      }
+
+      // Set default date to today
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('tanggal').value = today;
+    }
+
+    // Update statistics
+    function updateStats(records) {
+      const totalEntries = records.length;
+      const uniqueTeachers = new Set(records.map(r => r.nama_guru)).size;
+      const uniqueJuz = new Set(records.map(r => r.juz)).size;
+      
+      const today = new Date().toISOString().split('T')[0];
+      const todayEntries = records.filter(r => r.tanggal === today).length;
+
+      document.getElementById('total-entries').textContent = totalEntries;
+      document.getElementById('total-teachers').textContent = uniqueTeachers;
+      document.getElementById('total-juz').textContent = uniqueJuz;
+      document.getElementById('today-entries').textContent = todayEntries;
+
+      // Show/hide limit warning
+      const limitWarning = document.getElementById('limit-warning');
+      if (totalEntries >= 999) {
+        limitWarning.classList.remove('hidden');
+      } else {
+        limitWarning.classList.add('hidden');
+      }
+    }
+
+    // Render records
+    function renderRecords(records, searchTerm = '', filterJuz = '') {
+      const container = document.getElementById('records-list');
+      
+      let filtered = records;
+      if (searchTerm) {
+        filtered = filtered.filter(r => 
+          r.nama_guru.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      }
+      if (filterJuz) {
+        filtered = filtered.filter(r => r.juz === filterJuz);
+      }
+
+      // Sort by date (newest first)
+      filtered.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-8 text-gray-500">
+            <div class="text-4xl mb-2">📚</div>
+            <p>${records.length === 0 ? 'Belum ada catatan tadarus' : 'Tidak ada hasil pencarian'}</p>
+            <p class="text-sm">${records.length === 0 ? 'Mulai tambahkan catatan pertama!' : 'Coba kata kunci lain'}</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Track existing elements
+      const existingCards = new Map();
+      container.querySelectorAll('.record-card').forEach(card => {
+        existingCards.set(card.dataset.id, card);
+      });
+
+      const newIds = new Set(filtered.map(r => r.__backendId));
+
+      // Remove cards that no longer exist
+      existingCards.forEach((card, id) => {
+        if (!newIds.has(id)) {
+          card.remove();
+        }
+      });
+
+      // Update or create cards
+      filtered.forEach((record, index) => {
+        const existingCard = existingCards.get(record.__backendId);
+        
+        if (existingCard) {
+          updateRecordCard(existingCard, record);
+        } else {
+          const card = createRecordCard(record);
+          card.style.animationDelay = `${index * 0.05}s`;
+          
+          // Insert at correct position
+          const cards = container.querySelectorAll('.record-card');
+          if (cards[index]) {
+            container.insertBefore(card, cards[index]);
+          } else {
+            container.appendChild(card);
+          }
+        }
+      });
+    }
+
+    function createRecordCard(record) {
+      const card = document.createElement('div');
+      card.className = 'record-card bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-4 border border-emerald-100 fade-in';
+      card.dataset.id = record.__backendId;
+      updateRecordCard(card, record);
+      return card;
+    }
+
+    function updateRecordCard(card, record) {
+      const formattedDate = new Date(record.tanggal).toLocaleDateString('id-ID', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      card.innerHTML = `
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-lg">👤</span>
+              <h3 class="font-semibold text-emerald-800">${escapeHtml(record.nama_guru)}</h3>
+              <span class="px-2 py-0.5 bg-emerald-600 text-white text-xs rounded-full">${escapeHtml(record.juz)}</span>
+            </div>
+            <p class="text-sm text-gray-600 mb-1">
+              📅 ${formattedDate}
+            </p>
+            <p class="text-sm text-emerald-700">
+              📖 ${escapeHtml(record.surah_mulai)} : ${record.ayat_mulai} → ${escapeHtml(record.surah_selesai)} : ${record.ayat_selesai}
+            </p>
+            ${record.catatan ? `<p class="text-sm text-gray-500 mt-1 italic">💭 ${escapeHtml(record.catatan)}</p>` : ''}
+          </div>
+          <button onclick="showDeleteModal('${record.__backendId}')" 
+            class="delete-btn px-3 py-1.5 text-red-500 hover:bg-red-50 rounded-lg transition text-sm flex items-center gap-1">
+            🗑️ Hapus
+          </button>
+        </div>
+      `;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Delete modal functions
+    function showDeleteModal(id) {
+      recordToDelete = allRecords.find(r => r.__backendId === id);
+      document.getElementById('delete-modal').classList.remove('hidden');
+    }
+
+    function hideDeleteModal() {
+      recordToDelete = null;
+      document.getElementById('delete-modal').classList.add('hidden');
+    }
+
+    async function confirmDelete() {
+      if (!recordToDelete) return;
+      
+      const confirmBtn = document.getElementById('confirm-delete');
+      confirmBtn.classList.add('btn-loading');
+      confirmBtn.disabled = true;
+
+      const result = await window.dataSdk.delete(recordToDelete);
+      
+      confirmBtn.classList.remove('btn-loading');
+      confirmBtn.disabled = false;
+
+      if (!result.isOk) {
+        showToast('Gagal menghapus catatan', 'error');
+      }
+      
+      hideDeleteModal();
+    }
+
+    // Toast notification
+    function showToast(message, type = 'success') {
+      const existing = document.querySelector('.toast-message');
+      if (existing) existing.remove();
+
+      const toast = document.createElement('div');
+      toast.className = `toast-message fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg z-50 ${
+        type === 'success' ? 'bg-emerald-500' : 'bg-red-500'
+      } text-white font-medium fade-in`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+
+      setTimeout(() => toast.remove(), 3000);
+    }
+
+    // Data handler
+    const dataHandler = {
+      onDataChanged(data) {
+        allRecords = data;
+        updateStats(data);
+        
+        const searchTerm = document.getElementById('search-input').value;
+        const filterJuz = document.getElementById('filter-juz').value;
+        renderRecords(data, searchTerm, filterJuz);
+      }
+    };
+
+    // Form submission
+    async function handleSubmit(e) {
+      e.preventDefault();
+      
+      if (isSubmitting) return;
+      if (allRecords.length >= 999) {
+        showToast('Batas maksimum 999 catatan tercapai!', 'error');
+        return;
+      }
+
+      isSubmitting = true;
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.classList.add('btn-loading');
+      submitBtn.disabled = true;
+
+      const record = {
+        nama_guru: document.getElementById('nama-guru').value.trim(),
+        tanggal: document.getElementById('tanggal').value,
+        surah_mulai: document.getElementById('surah-mulai').value,
+        ayat_mulai: parseInt(document.getElementById('ayat-mulai').value),
+        surah_selesai: document.getElementById('surah-selesai').value,
+        ayat_selesai: parseInt(document.getElementById('ayat-selesai').value),
+        juz: document.getElementById('juz').value,
+        catatan: document.getElementById('catatan').value.trim(),
+        created_at: new Date().toISOString()
+      };
+
+      const result = await window.dataSdk.create(record);
+      
+      submitBtn.classList.remove('btn-loading');
+      submitBtn.disabled = false;
+      isSubmitting = false;
+
+      if (result.isOk) {
+        showToast('Catatan berhasil disimpan! ✨');
+        // Reset form except date
+        document.getElementById('nama-guru').value = '';
+        document.getElementById('surah-mulai').value = '';
+        document.getElementById('ayat-mulai').value = '';
+        document.getElementById('surah-selesai').value = '';
+        document.getElementById('ayat-selesai').value = '';
+        document.getElementById('juz').value = '';
+        document.getElementById('catatan').value = '';
+      } else {
+        showToast('Gagal menyimpan catatan', 'error');
+      }
+    }
+
+    // Element SDK config change handler
+    async function onConfigChange(config) {
+      document.getElementById('app-title').textContent = config.app_title || defaultConfig.app_title;
+      document.getElementById('school-name').textContent = config.school_name || defaultConfig.school_name;
+      document.getElementById('event-name').textContent = config.event_name || defaultConfig.event_name;
+      
+      const container = document.getElementById('app-container');
+      container.style.backgroundColor = config.background_color || defaultConfig.background_color;
+    }
+
+    // Initialize
+    async function init() {
+      populateDropdowns();
+
+      // Event listeners
+      document.getElementById('tadarus-form').addEventListener('submit', handleSubmit);
+      document.getElementById('cancel-delete').addEventListener('click', hideDeleteModal);
+      document.getElementById('confirm-delete').addEventListener('click', confirmDelete);
+      
+      document.getElementById('search-input').addEventListener('input', (e) => {
+        const filterJuz = document.getElementById('filter-juz').value;
+        renderRecords(allRecords, e.target.value, filterJuz);
+      });
+      
+      document.getElementById('filter-juz').addEventListener('change', (e) => {
+        const searchTerm = document.getElementById('search-input').value;
+        renderRecords(allRecords, searchTerm, e.target.value);
+      });
+
+      // Close modal on backdrop click
+      document.getElementById('delete-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'delete-modal') hideDeleteModal();
+      });
+
+      // Initialize Element SDK
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities: (config) => ({
+            recolorables: [
+              {
+                get: () => config.background_color || defaultConfig.background_color,
+                set: (value) => { config.background_color = value; window.elementSdk.setConfig({ background_color: value }); }
+              },
+              {
+                get: () => config.card_color || defaultConfig.card_color,
+                set: (value) => { config.card_color = value; window.elementSdk.setConfig({ card_color: value }); }
+              },
+              {
+                get: () => config.text_color || defaultConfig.text_color,
+                set: (value) => { config.text_color = value; window.elementSdk.setConfig({ text_color: value }); }
+              },
+              {
+                get: () => config.primary_color || defaultConfig.primary_color,
+                set: (value) => { config.primary_color = value; window.elementSdk.setConfig({ primary_color: value }); }
+              },
+              {
+                get: () => config.secondary_color || defaultConfig.secondary_color,
+                set: (value) => { config.secondary_color = value; window.elementSdk.setConfig({ secondary_color: value }); }
+              }
+            ],
+            borderables: [],
+            fontEditable: undefined,
+            fontSizeable: undefined
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ["app_title", config.app_title || defaultConfig.app_title],
+            ["school_name", config.school_name || defaultConfig.school_name],
+            ["event_name", config.event_name || defaultConfig.event_name]
+          ])
+        });
+      }
+
+      // Initialize Data SDK
+      if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (!result.isOk) {
+          console.error('Failed to initialize Data SDK');
+        }
+      }
+    }
+
+    init();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d0d7640a07be10a',t:'MTc3MTU4NDgyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
