@@ -49,8 +49,7 @@
   <style>body { box-sizing: border-box; }</style>
  </head>
  <body class="h-full font-poppins">
-  <div id="app-container" class="h-full w-full overflow-auto islamic-pattern" style="background-color: #0d4f3c;">
-   <!-- Header -->
+  <div id="app-container" class="h-full w-full overflow-auto islamic-pattern" style="background-color: #0d4f3c;"><!-- Header -->
    <header class="py-6 px-4 text-center">
     <div class="max-w-4xl mx-auto">
      <div class="text-5xl mb-3">
@@ -62,48 +61,44 @@
     </div>
    </header><!-- Main Content -->
    <main class="px-4 pb-8">
-    <div class="max-w-4xl mx-auto">
-     <!-- Form Card -->
+    <div class="max-w-4xl mx-auto"><!-- GitHub Settings Card -->
+     <div class="bg-white rounded-2xl card-shadow p-6 mb-6 fade-in">
+      <h2 class="font-amiri text-xl font-bold text-emerald-800 mb-4 flex items-center gap-2"><span>⚙️</span> Pengaturan GitHub</h2>
+      <div class="space-y-3">
+       <div><label for="github-token-input" class="block text-sm font-medium text-gray-700 mb-1">GitHub Token</label> <input type="password" id="github-token-input" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition" placeholder="ghp_xxxxxxxxxxxxx">
+        <p class="text-xs text-gray-500 mt-1">Token di-simpan lokal, hanya digunakan untuk backup</p>
+       </div>
+       <div><label for="github-repo-input" class="block text-sm font-medium text-gray-700 mb-1">Repository (username/repo)</label> <input type="text" id="github-repo-input" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition" placeholder="username/tadarus-smpn189">
+       </div><button id="save-github-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-4 rounded-lg transition">💾 Simpan &amp; Aktifkan</button>
+       <div id="github-status" class="hidden p-3 rounded-lg text-sm font-medium"></div>
+      </div>
+     </div><!-- Form Card -->
      <div class="bg-white rounded-2xl card-shadow p-6 mb-6 fade-in">
       <h2 class="font-amiri text-xl font-bold text-emerald-800 mb-4 flex items-center gap-2"><span>✍️</span> Tambah Catatan Tadarus</h2>
       <form id="tadarus-form" class="space-y-4">
        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- Nama Guru -->
-        <div>
-         <label for="nama-guru" class="block text-sm font-medium text-gray-700 mb-1">Nama Guru</label> <input type="text" id="nama-guru" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition" placeholder="Masukkan nama guru">
-        </div><!-- Tanggal -->
-        <div>
-         <label for="tanggal" class="block text-sm font-medium text-gray-700 mb-1">Tanggal</label> <input type="date" id="tanggal" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
+        <div><label for="nama-guru" class="block text-sm font-medium text-gray-700 mb-1">Nama Guru</label> <input type="text" id="nama-guru" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition" placeholder="Masukkan nama guru">
+        </div>
+        <div><label for="tanggal" class="block text-sm font-medium text-gray-700 mb-1">Tanggal</label> <input type="date" id="tanggal" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition">
         </div>
        </div>
        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <!-- Surah Mulai -->
-        <div>
-         <label for="surah-mulai" class="block text-sm font-medium text-gray-700 mb-1">Surah Mulai</label> <select id="surah-mulai" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"> <option value="">Pilih Surah</option> </select>
-        </div><!-- Ayat Mulai -->
-        <div>
-         <label for="ayat-mulai" class="block text-sm font-medium text-gray-700 mb-1">Ayat Mulai</label> <input type="number" id="ayat-mulai" min="1" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition" placeholder="1">
-        </div><!-- Juz -->
-        <div>
-         <label for="juz" class="block text-sm font-medium text-gray-700 mb-1">Juz</label> <select id="juz" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"> <option value="">Pilih Juz</option> </select>
+        <div><label for="surah-mulai" class="block text-sm font-medium text-gray-700 mb-1">Surah Mulai</label> <select id="surah-mulai" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"><option value="">Pilih Surah</option></select>
+        </div>
+        <div><label for="ayat-mulai" class="block text-sm font-medium text-gray-700 mb-1">Ayat Mulai</label> <input type="number" id="ayat-mulai" min="1" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition" placeholder="1">
+        </div>
+        <div><label for="juz" class="block text-sm font-medium text-gray-700 mb-1">Juz</label> <select id="juz" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"><option value="">Pilih Juz</option></select>
         </div>
        </div>
        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- Surah Selesai -->
-        <div>
-         <label for="surah-selesai" class="block text-sm font-medium text-gray-700 mb-1">Surah Selesai</label> <select id="surah-selesai" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"> <option value="">Pilih Surah</option> </select>
-        </div><!-- Ayat Selesai -->
-        <div>
-         <label for="ayat-selesai" class="block text-sm font-medium text-gray-700 mb-1">Ayat Selesai</label> <input type="number" id="ayat-selesai" min="1" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition" placeholder="1">
+        <div><label for="surah-selesai" class="block text-sm font-medium text-gray-700 mb-1">Surah Selesai</label> <select id="surah-selesai" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition"><option value="">Pilih Surah</option></select>
         </div>
-       </div><!-- Catatan -->
-       <div>
-        <label for="catatan" class="block text-sm font-medium text-gray-700 mb-1">Catatan (Opsional)</label> <textarea id="catatan" rows="2" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition" placeholder="Tambahkan catatan..."></textarea>
-       </div><!-- Submit Button --> <button type="submit" id="submit-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-lg transition transform hover:scale-[1.02] active:scale-[0.98]"> 💾 Simpan Catatan </button>
-      </form><!-- Limit Warning -->
-      <div id="limit-warning" class="hidden mt-4 p-3 bg-amber-100 border border-amber-300 rounded-lg text-amber-800 text-sm">
-       ⚠️ Batas maksimum 999 catatan telah tercapai. Silakan hapus beberapa catatan untuk menambah yang baru.
-      </div>
+        <div><label for="ayat-selesai" class="block text-sm font-medium text-gray-700 mb-1">Ayat Selesai</label> <input type="number" id="ayat-selesai" min="1" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition" placeholder="1">
+        </div>
+       </div>
+       <div><label for="catatan" class="block text-sm font-medium text-gray-700 mb-1">Catatan (Opsional)</label> <textarea id="catatan" rows="2" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition" placeholder="Tambahkan catatan..."></textarea>
+       </div><button type="submit" id="submit-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-lg transition transform hover:scale-[1.02] active:scale-[0.98]">💾 Simpan Catatan</button>
+      </form>
      </div><!-- Statistics -->
      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
       <div class="bg-white/90 backdrop-blur rounded-xl p-4 text-center card-shadow">
@@ -140,10 +135,9 @@
       </div>
      </div><!-- Records List -->
      <div class="bg-white rounded-2xl card-shadow p-6 fade-in">
-      <h2 class="font-amiri text-xl font-bold text-emerald-800 mb-4 flex items-center gap-2"><span>📋</span> Riwayat Tadarus</h2><!-- Search & Filter -->
-      <div class="flex flex-col md:flex-row gap-3 mb-4">
-       <input type="text" id="search-input" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="🔍 Cari nama guru..."> <select id="filter-juz" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"> <option value="">Semua Juz</option> </select>
-      </div><!-- Records Container -->
+      <h2 class="font-amiri text-xl font-bold text-emerald-800 mb-4 flex items-center gap-2"><span>📋</span> Riwayat Tadarus</h2>
+      <div class="flex flex-col md:flex-row gap-3 mb-4"><input type="text" id="search-input" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="🔍 Cari nama guru..."> <select id="filter-juz" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"><option value="">Semua Juz</option></select>
+      </div>
       <div id="records-list" class="space-y-3 max-h-96 overflow-y-auto">
        <div class="text-center py-8 text-gray-500">
         <div class="text-4xl mb-2">
@@ -165,8 +159,7 @@
    <div class="bg-white rounded-xl p-6 max-w-sm w-full card-shadow">
     <h3 class="font-semibold text-lg text-gray-800 mb-2">Hapus Catatan?</h3>
     <p class="text-gray-600 text-sm mb-4">Catatan ini akan dihapus secara permanen.</p>
-    <div class="flex gap-3">
-     <button id="cancel-delete" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"> Batal </button> <button id="confirm-delete" class="flex-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"> Hapus </button>
+    <div class="flex gap-3"><button id="cancel-delete" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition">Batal</button> <button id="confirm-delete" class="flex-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">Hapus</button>
     </div>
    </div>
   </div>
@@ -187,7 +180,6 @@
       "Al-Masad", "Al-Ikhlas", "Al-Falaq", "An-Nas"
     ];
 
-    // Default config
     const defaultConfig = {
       app_title: "Catatan Tadarus Al-Qur'an",
       school_name: "SMPN 189 Jakarta",
@@ -202,8 +194,82 @@
     let allRecords = [];
     let recordToDelete = null;
     let isSubmitting = false;
+    let githubToken = '';
+    let githubRepo = '';
 
-    // Populate dropdowns
+    // Load GitHub settings from localStorage
+    function loadGitHubSettings() {
+      githubToken = localStorage.getItem('githubToken') || '';
+      githubRepo = localStorage.getItem('githubRepo') || '';
+      document.getElementById('github-token-input').value = githubToken;
+      document.getElementById('github-repo-input').value = githubRepo;
+      updateGitHubStatus();
+    }
+
+    function updateGitHubStatus() {
+      const statusDiv = document.getElementById('github-status');
+      if (githubToken && githubRepo) {
+        statusDiv.className = 'p-3 bg-emerald-50 border border-emerald-300 rounded-lg text-emerald-800 text-sm';
+        statusDiv.textContent = '✅ GitHub terhubung - Auto-backup aktif';
+        statusDiv.classList.remove('hidden');
+      } else {
+        statusDiv.classList.add('hidden');
+      }
+    }
+
+    // Backup to GitHub with proper SHA handling
+    async function backupToGitHub(records) {
+      if (!githubToken || !githubRepo) return;
+
+      try {
+        const [owner, repo] = githubRepo.split('/');
+        const fileName = 'tadarus-backup.json';
+        const content = JSON.stringify(records, null, 2);
+        const contentBase64 = btoa(unescape(encodeURIComponent(content)));
+        const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${fileName}`;
+
+        // Get existing file SHA
+        let sha = null;
+        try {
+          const getResponse = await fetch(apiUrl, {
+            headers: {
+              'Authorization': `Bearer ${githubToken}`,
+              'Accept': 'application/vnd.github.v3+json'
+            }
+          });
+          
+          if (getResponse.ok) {
+            const fileData = await getResponse.json();
+            sha = fileData.sha;
+          }
+        } catch (e) {
+          // File doesn't exist yet
+        }
+
+        // Upload/Update file
+        const uploadResponse = await fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${githubToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: `Backup tadarus - ${new Date().toLocaleString('id-ID')}`,
+            content: contentBase64,
+            branch: 'main',
+            ...(sha && { sha })
+          })
+        });
+
+        if (!uploadResponse.ok) {
+          const error = await uploadResponse.json();
+          console.error('GitHub backup error:', error.message);
+        }
+      } catch (error) {
+        console.error('Backup error:', error);
+      }
+    }
+
     function populateDropdowns() {
       const surahSelects = document.querySelectorAll('#surah-mulai, #surah-selesai');
       surahSelects.forEach(select => {
@@ -229,12 +295,9 @@
         filterJuz.appendChild(option2);
       }
 
-      // Set default date to today
-      const today = new Date().toISOString().split('T')[0];
-      document.getElementById('tanggal').value = today;
+      document.getElementById('tanggal').value = new Date().toISOString().split('T')[0];
     }
 
-    // Update statistics
     function updateStats(records) {
       const totalEntries = records.length;
       const uniqueTeachers = new Set(records.map(r => r.nama_guru)).size;
@@ -247,31 +310,19 @@
       document.getElementById('total-teachers').textContent = uniqueTeachers;
       document.getElementById('total-juz').textContent = uniqueJuz;
       document.getElementById('today-entries').textContent = todayEntries;
-
-      // Show/hide limit warning
-      const limitWarning = document.getElementById('limit-warning');
-      if (totalEntries >= 999) {
-        limitWarning.classList.remove('hidden');
-      } else {
-        limitWarning.classList.add('hidden');
-      }
     }
 
-    // Render records
     function renderRecords(records, searchTerm = '', filterJuz = '') {
       const container = document.getElementById('records-list');
       
       let filtered = records;
       if (searchTerm) {
-        filtered = filtered.filter(r => 
-          r.nama_guru.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        filtered = filtered.filter(r => r.nama_guru.toLowerCase().includes(searchTerm.toLowerCase()));
       }
       if (filterJuz) {
         filtered = filtered.filter(r => r.juz === filterJuz);
       }
 
-      // Sort by date (newest first)
       filtered.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
 
       if (filtered.length === 0) {
@@ -285,22 +336,16 @@
         return;
       }
 
-      // Track existing elements
       const existingCards = new Map();
       container.querySelectorAll('.record-card').forEach(card => {
         existingCards.set(card.dataset.id, card);
       });
 
       const newIds = new Set(filtered.map(r => r.__backendId));
-
-      // Remove cards that no longer exist
       existingCards.forEach((card, id) => {
-        if (!newIds.has(id)) {
-          card.remove();
-        }
+        if (!newIds.has(id)) card.remove();
       });
 
-      // Update or create cards
       filtered.forEach((record, index) => {
         const existingCard = existingCards.get(record.__backendId);
         
@@ -309,14 +354,7 @@
         } else {
           const card = createRecordCard(record);
           card.style.animationDelay = `${index * 0.05}s`;
-          
-          // Insert at correct position
-          const cards = container.querySelectorAll('.record-card');
-          if (cards[index]) {
-            container.insertBefore(card, cards[index]);
-          } else {
-            container.appendChild(card);
-          }
+          container.appendChild(card);
         }
       });
     }
@@ -331,10 +369,7 @@
 
     function updateRecordCard(card, record) {
       const formattedDate = new Date(record.tanggal).toLocaleDateString('id-ID', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
       });
 
       card.innerHTML = `
@@ -345,18 +380,11 @@
               <h3 class="font-semibold text-emerald-800">${escapeHtml(record.nama_guru)}</h3>
               <span class="px-2 py-0.5 bg-emerald-600 text-white text-xs rounded-full">${escapeHtml(record.juz)}</span>
             </div>
-            <p class="text-sm text-gray-600 mb-1">
-              📅 ${formattedDate}
-            </p>
-            <p class="text-sm text-emerald-700">
-              📖 ${escapeHtml(record.surah_mulai)} : ${record.ayat_mulai} → ${escapeHtml(record.surah_selesai)} : ${record.ayat_selesai}
-            </p>
+            <p class="text-sm text-gray-600 mb-1">📅 ${formattedDate}</p>
+            <p class="text-sm text-emerald-700">📖 ${escapeHtml(record.surah_mulai)} : ${record.ayat_mulai} → ${escapeHtml(record.surah_selesai)} : ${record.ayat_selesai}</p>
             ${record.catatan ? `<p class="text-sm text-gray-500 mt-1 italic">💭 ${escapeHtml(record.catatan)}</p>` : ''}
           </div>
-          <button onclick="showDeleteModal('${record.__backendId}')" 
-            class="delete-btn px-3 py-1.5 text-red-500 hover:bg-red-50 rounded-lg transition text-sm flex items-center gap-1">
-            🗑️ Hapus
-          </button>
+          <button onclick="showDeleteModal('${record.__backendId}')" class="delete-btn px-3 py-1.5 text-red-500 hover:bg-red-50 rounded-lg transition text-sm flex items-center gap-1">🗑️ Hapus</button>
         </div>
       `;
     }
@@ -367,7 +395,6 @@
       return div.innerHTML;
     }
 
-    // Delete modal functions
     function showDeleteModal(id) {
       recordToDelete = allRecords.find(r => r.__backendId === id);
       document.getElementById('delete-modal').classList.remove('hidden');
@@ -397,7 +424,6 @@
       hideDeleteModal();
     }
 
-    // Toast notification
     function showToast(message, type = 'success') {
       const existing = document.querySelector('.toast-message');
       if (existing) existing.remove();
@@ -412,7 +438,6 @@
       setTimeout(() => toast.remove(), 3000);
     }
 
-    // Data handler
     const dataHandler = {
       onDataChanged(data) {
         allRecords = data;
@@ -421,18 +446,18 @@
         const searchTerm = document.getElementById('search-input').value;
         const filterJuz = document.getElementById('filter-juz').value;
         renderRecords(data, searchTerm, filterJuz);
+
+        // Auto-backup setiap ada perubahan data
+        if (githubToken && githubRepo) {
+          backupToGitHub(data);
+        }
       }
     };
 
-    // Form submission
     async function handleSubmit(e) {
       e.preventDefault();
       
       if (isSubmitting) return;
-      if (allRecords.length >= 999) {
-        showToast('Batas maksimum 999 catatan tercapai!', 'error');
-        return;
-      }
 
       isSubmitting = true;
       const submitBtn = document.getElementById('submit-btn');
@@ -459,7 +484,6 @@
 
       if (result.isOk) {
         showToast('Catatan berhasil disimpan! ✨');
-        // Reset form except date
         document.getElementById('nama-guru').value = '';
         document.getElementById('surah-mulai').value = '';
         document.getElementById('ayat-mulai').value = '';
@@ -472,7 +496,6 @@
       }
     }
 
-    // Element SDK config change handler
     async function onConfigChange(config) {
       document.getElementById('app-title').textContent = config.app_title || defaultConfig.app_title;
       document.getElementById('school-name').textContent = config.school_name || defaultConfig.school_name;
@@ -482,9 +505,9 @@
       container.style.backgroundColor = config.background_color || defaultConfig.background_color;
     }
 
-    // Initialize
     async function init() {
       populateDropdowns();
+      loadGitHubSettings();
 
       // Event listeners
       document.getElementById('tadarus-form').addEventListener('submit', handleSubmit);
@@ -501,12 +524,26 @@
         renderRecords(allRecords, searchTerm, e.target.value);
       });
 
-      // Close modal on backdrop click
+      document.getElementById('save-github-btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        githubToken = document.getElementById('github-token-input').value.trim();
+        githubRepo = document.getElementById('github-repo-input').value.trim();
+        
+        if (!githubToken || !githubRepo) {
+          showToast('Isi GitHub token dan repository terlebih dahulu', 'error');
+          return;
+        }
+
+        localStorage.setItem('githubToken', githubToken);
+        localStorage.setItem('githubRepo', githubRepo);
+        updateGitHubStatus();
+        showToast('✅ Pengaturan GitHub disimpan! Auto-backup aktif', 'success');
+      });
+
       document.getElementById('delete-modal').addEventListener('click', (e) => {
         if (e.target.id === 'delete-modal') hideDeleteModal();
       });
 
-      // Initialize Element SDK
       if (window.elementSdk) {
         window.elementSdk.init({
           defaultConfig,
@@ -541,12 +578,13 @@
           mapToEditPanelValues: (config) => new Map([
             ["app_title", config.app_title || defaultConfig.app_title],
             ["school_name", config.school_name || defaultConfig.school_name],
-            ["event_name", config.event_name || defaultConfig.event_name]
+            ["event_name", config.event_name || defaultConfig.event_name],
+            ["github_token", githubToken ? '●●●●●●●●' : ''],
+            ["github_repo", githubRepo || '']
           ])
         });
       }
 
-      // Initialize Data SDK
       if (window.dataSdk) {
         const result = await window.dataSdk.init(dataHandler);
         if (!result.isOk) {
@@ -557,5 +595,5 @@
 
     init();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d0d7640a07be10a',t:'MTc3MTU4NDgyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d138222f717fd04',t:'MTc3MTY0ODIyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
